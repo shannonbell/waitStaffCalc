@@ -1,0 +1,150 @@
+<html ng-app='myApp'>
+<head lang="en">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
+    <script src="myApp.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Waitstaff Calculator
+    </title>
+
+
+</head>
+<body  ng-controller="MyCtrl">
+<form name="waitstaffCalcForm" novalidate ng-submit="submit()">
+    <div class="container">
+        <h1>Waitstaff Calculator</h1>
+        <div class="row">
+            <div class="col-xs-6">
+
+                <!-- Enter the Meal Details -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Enter the Meal Details</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-5">
+                                <label class="control-label">Base Meal Price: $</label>
+                            </div>
+                            <div class="form-group col-xs-6">
+                                <input type="number" min="0" name="mealPrice" class="form-control" ng-model="mealPrice" required />
+                                <span class="has-error" ng-if="waitstaffCalcForm.$submitted && waitstaffCalcForm.mealPrice.$error.required">
+                                    A Huge Number is required!
+                                </span>
+                                <span class="error" ng-show="waitstaffCalcForm.mealPrice.$error.number">
+                                    Not valid number!
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-5">
+                                <label class="control-label">Tax Rate: %</label>
+                            </div>
+                            <div class="form-group col-xs-4">
+                                <input type="number" min="0" name="taxRate" class="form-control" ng-model="taxRate" required />
+                        <span class="has-error" ng-if="waitstaffCalcForm.$submitted && waitstaffCalcForm.taxRate.$error.required">
+                            A Huge Number is required!
+                        </span>
+                        <span class="error" ng-show="waitstaffCalcForm.taxRate.$error.number">
+                            Not valid number!
+                        </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-5">
+                                <label class="control-label">Tip Percentage: %</label>
+                            </div>
+                            <div class="form-group col-xs-4">
+                                <input type="number" min="0" name="tipPercentage" class="form-control" ng-model="tipPercentage" required />
+                                <span class="has-error" ng-if="waitstaffCalcForm.$submitted && waitstaffCalcForm.tipPercentage.$error.required">
+                                    A Huge Number is required!
+                                </span>
+                                <span class="error" ng-show="waitstaffCalcForm.tipPercentage.$error.number">
+                                    Not valid number!
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4"></div>
+                            <div class="col-xs-2">
+                                <input type="submit" value="Submit" class="btn btn-primary" />
+                            </div>
+                            <div class="col-xs-2">
+                                <input type="button" value="Cancel" class="btn" ng-click="cancel()"/>
+                            </div>
+                            <div class="col-xs-4"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xs-6">
+
+                <!-- Customer Charges -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Customer Charges</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-3">Subtotal:</div>
+                            <div class="col-xs-3">
+                                {{subTotal | currency}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-3">Tip:</div>
+                            <div class="col-xs-3">
+                                {{tip | currency}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6"><hr /></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-3">Total:</div>
+                            <div class="col-xs-3">
+                                {{total | currency}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Earning Info -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">My Earning Info</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-5">Total Tip:</div>
+                            <div class="col-xs-4">
+                                {{totalTip | currency}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-5">Meal Count:</div>
+                            <div class="col-xs-4">
+                                {{mealCount}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-5">Average Tip Per Meal:</div>
+                            <div class="col-xs-4">
+                                {{averageTipPerMeal | currency}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <input type="button" value="Reset" class="btn pull-right" ng-click="reset()"/>
+        </div>
+    </div>
+</form>
+</body>
+</html>
