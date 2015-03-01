@@ -1,7 +1,26 @@
-angular.module('myApp', [])
+angular.module('myApp', ['ngRoute'])
 
-
-    .controller('MyCtrl', function($scope) {
+    .config(['$routeProvider', function($routeProvider) {
+        $routeProvider.when('/', {
+            templateUrl : 'home.html',
+            controller : 'MyCtrl'
+        })
+        .when('/new-meal', {
+            templateUrl : 'new-meal.html',
+            controller : 'MyCtrl'
+        })
+        .when('/my-earnings', {
+            templateUrl : 'my-earnings.html',
+            controller : 'MyCtrl'
+        })
+        .otherwise('/');
+    }])
+    .controller('MyEarningCtrl', function($scope, $rootScope) {
+        $scope.totalTip = $rootScope.totalTip;
+        $scope.mealCount = $rootScope.mealCount;
+        $scope.averageTipPerMeal = $rootScope.averageTipPerMeal;
+    })
+    .controller('MyCtrl', function($scope, $rootScope) {
 
         var totalTipVal = 0;
         var mealCountVal = 0;
@@ -14,12 +33,12 @@ angular.module('myApp', [])
                 $scope.total = $scope.subTotal + $scope.tip;
 
                 totalTipVal = totalTipVal + $scope.tip;
-                $scope.totalTip = totalTipVal;
+                $rootScope.totalTip = totalTipVal;
 
                 mealCountVal = mealCountVal + 1;
-                $scope.mealCount = mealCountVal;
+                $rootScope.mealCount = mealCountVal;
 
-                $scope.averageTipPerMeal = totalTipVal / mealCountVal;
+                $rootScope.averageTipPerMeal = totalTipVal / mealCountVal;
             }
         }
 

@@ -1,0 +1,31 @@
+
+<!-- My Earning Info -->
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1 class="panel-title">My Earning Info</h1>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-5">Total Tip:</div>
+            <div class="col-xs-4">
+                {{totalTip | currency}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-5">Meal Count:</div>
+            <div class="col-xs-4">
+                {{mealCount}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-5">Average Tip Per Meal:</div>
+            <div class="col-xs-4">
+                {{averageTipPerMeal | currency}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <input type="button" value="Reset" class="btn pull-right" ng-click="reset()"/>
+</div>
